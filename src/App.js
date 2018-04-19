@@ -1,31 +1,28 @@
 import React, { Component } from 'react'
-import './App.css'
+import Sidebar from './Sidebar'
+import Controls from './Controls'
+import Callers from './Callers'
+import Video from './Video'
+import styled from 'react-emotion'
+
+const Container = styled('div')`
+  display: grid;
+  grid-template-columns: 100px auto;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+    "sidebar buttons"
+    "sidebar callers";
+`
 
 class App extends Component {
   render () {
     return (
-      <div className='grid'>
-        <div id='video' />
-        <div id='buttons'>
-          <img src='person.png' class='top-button hoverable' />
-          <img src='microphone.png' class='top-button hoverable' />
-          <img src='video.png' class='top-button hoverable' />
-          <img src='signal.png' class='top-button hoverable' />
-          <img src='settings.png' class='top-button hoverable' />
-          <img src='phone.png' class='top-button hoverable' />
-        </div>
-        <div id='sidebar'>
-          <img src='chat.png' class='side-button hoverable' />
-          <img src='share.png' class='side-button hoverable' />
-          <img src='camera.png' class='side-button hoverable' />
-          <img src='lifesaver.png' class='side-button hoverable' />
-          <img src='options.png' class='side-button hoverable' />
-        </div>
-        <div id='callers'>
-          <img src='caller.png' class='caller hoverable' />
-          <img src='caller.png' class='caller hoverable' />
-        </div>
-      </div>
+      <Container>
+        <Video />
+        <Controls />
+        <Sidebar />
+        <Callers />
+      </Container>
     )
   }
 }
