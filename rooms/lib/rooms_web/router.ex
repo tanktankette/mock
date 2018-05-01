@@ -5,7 +5,14 @@ defmodule RoomsWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", RoomsWeb do
+  scope "/api" do
     pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: RoomsWeb.Schema
+
+    forward "/", Absinthe.Plug,
+      schema: RoomsWeb.Schema
+
   end
 end
