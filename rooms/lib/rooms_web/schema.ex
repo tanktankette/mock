@@ -11,6 +11,22 @@ defmodule RoomsWeb.Schema do
       resolve &Resolvers.Calls.list_users/3
     end
 
+    @desc "Get a room"
+    field :room, :room do
+      arg :id, non_null(:id)
+      resolve &Resolvers.Calls.get_room_by/3
+    end
+
+  end
+
+  mutation do
+
+    @desc "Create a room"
+    field :create_room, type: :room do
+      arg :description, non_null(:string)
+      resolve &Resolvers.Calls.create_room/3
+    end
+    
   end
 
 end
