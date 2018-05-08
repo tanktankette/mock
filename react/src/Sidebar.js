@@ -25,11 +25,11 @@ export default class Sidebar extends Component {
   render () {
     return (
       <Container>
-        <img src='chat.png' class={sideStyling} />
-        <img src='share.png' class={sideStyling} />
-        <img src='camera.png' class={sideStyling} />
-        <img src='lifesaver.png' class={sideStyling} />
-        <img src='options.png' class={sideStyling} />
+        <img src='chat.png' className={sideStyling} alt='' />
+        <img src='share.png' className={sideStyling} alt='' />
+        <img src='camera.png' className={sideStyling} alt='' />
+        <img src='lifesaver.png' className={sideStyling} alt='' />
+        <img src='options.png' className={sideStyling} alt='' />
       </Container>
     )
   }

@@ -1,0 +1,20 @@
+schema {
+  query: RootQuery
+}
+
+type RootQuery {
+  rooms: [Room]
+}
+
+type Room {
+  id: ID
+  description: String
+  users: [User]
+}
+
+type User {
+  id: ID
+  name: String
+  cid: String
+  room: Room
+}

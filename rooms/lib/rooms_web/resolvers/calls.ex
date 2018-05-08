@@ -4,6 +4,10 @@ defmodule RoomsWeb.Resolvers.Calls do
     {:ok, Rooms.Calls.list_users()}
   end
 
+  def list_rooms(_parent, _args, _resolution) do
+    {:ok, Rooms.Calls.list_rooms()}
+  end
+
   def get_room_by(_parent, args, _resolution) do
     {:ok, Rooms.Calls.get_room_by(args)}
   end
