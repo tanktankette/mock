@@ -42,6 +42,7 @@ defmodule Rooms.Mixfile do
       {:absinthe_ecto, "~>0.1.0"},
       {:absinthe_plug, "~>1.3.0"},
       {:cors_plug, "~> 1.5"},
+      {:httpoison, "~> 1.1"},
     ]
   end
 
