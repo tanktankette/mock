@@ -43,6 +43,7 @@ defmodule Rooms.Mixfile do
       {:absinthe_plug, "~>1.3.0"},
       {:cors_plug, "~> 1.5"},
       {:httpoison, "~> 1.1"},
+      {:poison, "~> 3.1"},
     ]
   end
 

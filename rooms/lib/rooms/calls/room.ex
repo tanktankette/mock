@@ -4,7 +4,8 @@ defmodule Rooms.Calls.Room do
 
 
   schema "rooms" do
-    field :description, :string
+    field :name, :string
+    field :sid, :string
     has_many :users, Rooms.Calls.User
 
 
@@ -14,7 +15,7 @@ defmodule Rooms.Calls.Room do
   @doc false
   def changeset(room, attrs) do
     room
-    |> cast(attrs, [:description])
-    |> validate_required([:description])
+    |> cast(attrs, [:name, :sid])
+    |> validate_required([:name, :sid])
   end
 end

@@ -4,7 +4,8 @@ defmodule RoomsWeb.Schema.CallsTypes do
 
   object :room do
     field :id, :id
-    field :description, :string
+    field :name, :string
+    field :sid, :string
     field :users, list_of(:user), resolve: assoc(:users)
   end
  

@@ -28,7 +28,7 @@ defmodule RoomsWeb.Schema do
 
     @desc "Create a room"
     field :create_room, type: :room do
-      arg :description, non_null(:string)
+      arg :name, non_null(:string)
       resolve &Resolvers.Calls.create_room/3
     end
     
