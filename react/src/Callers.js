@@ -7,7 +7,7 @@ import {graphql, QueryRenderer} from 'react-relay'
 const query = graphql`
   query CallersRoomsQuery {
     rooms {
-      description
+      id
     }
   }
 `

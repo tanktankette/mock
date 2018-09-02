@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8e6b593c1242b75f132f0569dc9d94a5
+ * @relayHash bdc47904606c9af7c1a5a1080e6a704b
  */
 
 /* eslint-disable */
@@ -12,7 +12,7 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type CallersRoomsQueryVariables = {||};
 export type CallersRoomsQueryResponse = {|
   +rooms: ?$ReadOnlyArray<?{|
-    +description: ?string
+    +id: ?string
   |}>
 |};
 */
@@ -21,7 +21,7 @@ export type CallersRoomsQueryResponse = {|
 /*
 query CallersRoomsQuery {
   rooms {
-    description
+    id
   }
 }
 */
@@ -40,7 +40,7 @@ var v0 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "description",
+        "name": "id",
         "args": null,
         "storageKey": null
       }
@@ -52,7 +52,7 @@ return {
   "operationKind": "query",
   "name": "CallersRoomsQuery",
   "id": null,
-  "text": "query CallersRoomsQuery {\n  rooms {\n    description\n  }\n}\n",
+  "text": "query CallersRoomsQuery {\n  rooms {\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -71,5 +71,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ecadc1aa696f4f5895d50aff82a9a0fd';
+(node/*: any*/).hash = 'd560801ef50a50695d3c86936653f1be';
 module.exports = node;

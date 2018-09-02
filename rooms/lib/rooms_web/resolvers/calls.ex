@@ -20,7 +20,6 @@ defmodule RoomsWeb.Resolvers.Calls do
     encoded = Base.encode64("#{sid}:#{secret}")
     auth = "Basic #{encoded}"
     
-    IO.puts "hi"
     case HTTPoison.post "https://video.twilio.com/v1/Rooms", "", [{"Authorization", auth}] do
       {:ok, response} -> 
         case Poison.decode response.body do
@@ -31,7 +30,6 @@ defmodule RoomsWeb.Resolvers.Calls do
           end
       
       {:error, reason} ->
-        IO.puts "hi2"
         {:error, message: "Connection error", details: reason}
       end
   end
