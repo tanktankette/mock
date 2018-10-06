@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5b70b176ec4044cdc1ea82fec9e80642
+ * @relayHash c23400c682aba06d3b86a3b3e9edf80e
  */
 
 /* eslint-disable */
@@ -13,7 +13,7 @@ export type RoomMenuRoomsQueryVariables = {||};
 export type RoomMenuRoomsQueryResponse = {|
   +rooms: ?$ReadOnlyArray<?{|
     +id: ?string,
-    +description: ?string,
+    +sid: ?string,
     +users: ?$ReadOnlyArray<?{|
       +name: ?string
     |}>,
@@ -26,7 +26,7 @@ export type RoomMenuRoomsQueryResponse = {|
 query RoomMenuRoomsQuery {
   rooms {
     id
-    description
+    sid
     users {
       name
       id
@@ -46,7 +46,7 @@ var v0 = {
 v1 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "description",
+  "name": "sid",
   "args": null,
   "storageKey": null
 },
@@ -62,7 +62,7 @@ return {
   "operationKind": "query",
   "name": "RoomMenuRoomsQuery",
   "id": null,
-  "text": "query RoomMenuRoomsQuery {\n  rooms {\n    id\n    description\n    users {\n      name\n      id\n    }\n  }\n}\n",
+  "text": "query RoomMenuRoomsQuery {\n  rooms {\n    id\n    sid\n    users {\n      name\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -134,5 +134,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '2ebd6a00295fd0c0c8055048aaa07747';
+(node/*: any*/).hash = 'fb42b30af932c442a11d8e46a3f3c38a';
 module.exports = node;

@@ -8,7 +8,7 @@ type RootQuery {
 
 type Room {
   id: ID
-  description: String
+  sid: String
   users: [User]
 }
 

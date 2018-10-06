@@ -16,7 +16,8 @@
     "react-relay": "^1.6.0",
     "react-scripts": "^1.1.4",
     "relay": "^0.8.0-1",
-    "relay-compiler": "^1.6.0"
+    "relay-compiler": "^1.6.0",
+    "twilio-video": "^1.14.0"
   },
   "scripts": {
     "start": "react-app-rewired start",

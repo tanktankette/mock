@@ -6,7 +6,7 @@ const query = graphql`
   query RoomMenuRoomsQuery {
     rooms {
       id
-      description
+      sid
       users {
         name
       }
@@ -31,7 +31,10 @@ export default class RoomMenu extends Component {
             return <div>Loading...</div>
           }
 
-          const rooms = props.rooms.map((room) => <button onClick={props.changeRoom}>{room.id}</button>)
+          const rooms = props.rooms.map((room) => {
+            console.log(room.sid)
+            return <button value={room.sid} onClick={this.props.changeRoomID}>{room.id}</button>
+          })
           return rooms
         }}
       />
