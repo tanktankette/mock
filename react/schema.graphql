@@ -6,6 +6,20 @@ type RootQuery {
   rooms: [Room]
 }
 
+input CreateRoomData {
+  name: String
+  clientMutationId: String!
+}
+
+type CreateRoomPayload {
+  room: Room
+  clientMutationId: String!
+}
+
+type Mutation {
+  createRoom(input: CreateRoomData!): CreateRoomPayload
+}
+
 type Room {
   id: ID
   sid: String

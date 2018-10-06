@@ -1,43 +1,53 @@
 import React, { Component } from 'react'
-import environment from './environment'
-import {graphql, QueryRenderer} from 'react-relay'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
 
-const query = graphql`
-  query RoomMenuRoomsQuery {
+const query = gql`
+  {
     rooms {
       id
       sid
-      users {
-        name
-      }
     }
-  }
-`
+  }`
+
+// const createRoom = gql`
+//   mutation {
+//     createRoom(name:"hi"){
+//       name
+//     }
+//   }`
+
+// const deleteRoom = gql`
+// mutation {
+//   deleteRoom(id:"hi"){
+//     name
+//   }
+// }`
 
 export default class RoomMenu extends Component {
   render () {
     return (
-      <QueryRenderer
-        environment={environment}
-        query={query}
-        variables={{}}
-        render={({error, props}) => {
+      <Query query={query}>
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>
           if (error) {
             console.log(error)
-            return <div>Error</div>
+            return <p>Error :(</p>
           }
 
-          if (!props) {
-            return <div>Loading...</div>
-          }
-
-          const rooms = props.rooms.map((room) => {
+          const rooms = data.rooms.map((room) => {
             console.log(room.sid)
-            return <button value={room.sid} onClick={this.props.changeRoomID}>{room.id}</button>
+            return (
+              <div>
+                <div>{room.id}</div>
+                <button value={room.id} onClick={this.props.deleteRoom}>delete</button>
+                <button value={room.sid} onClick={this.props.changeRoomID}>connect</button>
+              </div>
+            )
           })
           return rooms
         }}
-      />
+      </Query>
     )
   }
 }

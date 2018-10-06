@@ -1,16 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
 import { css } from 'emotion'
-import environment from './environment'
-import {graphql, QueryRenderer} from 'react-relay'
-
-const query = graphql`
-  query CallersRoomsQuery {
-    rooms {
-      id
-    }
-  }
-`
 
 const Container = styled('div')`
   grid-area: 2 / 2 / 3 / 3;
@@ -32,27 +22,10 @@ const callerStyling = css`
 
 export default class Callers extends Component {
   render () {
+    let callers = Array(3).fill(<img src='caller.png' class={callerStyling} alt='' />)
     return (
       <Container>
-        <QueryRenderer
-          environment={environment}
-          query={query}
-          variables={{}}
-          render={({error, props}) => {
-            if (error) {
-              console.log(error)
-              return <div>Error</div>
-            }
-
-            if (!props) {
-              return <div>Loading...</div>
-            }
-
-            const rooms = Array(props.rooms.length).fill(<img src='caller.png' class={callerStyling} alt='' />)
-            return rooms
-          }}
-        />
-
+        {callers}
       </Container>
     )
   }
