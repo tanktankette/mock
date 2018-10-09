@@ -22,10 +22,10 @@ const callerStyling = css`
 
 export default class Callers extends Component {
   render () {
+    let callers = Array(3).fill(<img src='caller.png' class={callerStyling} alt='' />)
     return (
       <Container>
-        <img src='caller.png' class={callerStyling} />
-        <img src='caller.png' class={callerStyling} />
+        {callers}
       </Container>
     )
   }

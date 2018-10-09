@@ -28,12 +28,12 @@ export default class Controls extends Component {
   render () {
     return (
       <Container>
-        <img src='person.png' class={controlStyling} />
-        <img src='microphone.png' class={controlStyling} />
-        <img src='video.png' class={controlStyling} />
-        <img src='signal.png' class={controlStyling} />
-        <img src='settings.png' class={controlStyling} />
-        <img src='phone.png' class={controlStyling} />
+        <img src='person.png' className={controlStyling} alt='' />
+        <img src='microphone.png' className={controlStyling} alt='' />
+        <img src='video.png' className={controlStyling} alt='' />
+        <img src='signal.png' className={controlStyling} alt='' />
+        <img src='settings.png' className={controlStyling} alt='' />
+        <img src='phone.png' className={controlStyling} alt='' />
       </Container>
     )
   }

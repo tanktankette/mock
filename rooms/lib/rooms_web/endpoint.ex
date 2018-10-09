@@ -35,6 +35,8 @@ defmodule RoomsWeb.Endpoint do
     key: "_rooms_key",
     signing_salt: "cSb5WhN+"
 
+  plug CORSPlug, origin: ["http://localhost"]
+
   plug RoomsWeb.Router
 
   @doc """

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
+// const { connect, createLocalTracks } = require('twilio-video')
 
 const Container = styled('div')`
   background-image: url("/background.jpg");
@@ -14,3 +15,5 @@ export default class Video extends Component {
     )
   }
 }
+
+// disconnect on leaving page
