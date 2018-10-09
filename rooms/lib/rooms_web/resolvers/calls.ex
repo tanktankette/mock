@@ -38,4 +38,12 @@ defmodule RoomsWeb.Resolvers.Calls do
     {:ok, Rooms.Calls.create_user(args)}
   end
 
+  def delete_room(_parent, args, _resolution) do
+    case Rooms.Calls.get_room(args[:id]) do
+      nil ->
+        {:error, message: "Invalid id"}
+      room ->
+        Rooms.Calls.delete_room(room)
+    end
+  end
 end

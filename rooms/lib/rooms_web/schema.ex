@@ -31,6 +31,12 @@ defmodule RoomsWeb.Schema do
       arg :name, non_null(:string)
       resolve &Resolvers.Calls.create_room/3
     end
+
+    @desc "Delete a room"
+    field :delete_room, type: :room do
+      arg :id, non_null(:id)
+      resolve &Resolvers.Calls.delete_room/3
+    end
     
   end
 
