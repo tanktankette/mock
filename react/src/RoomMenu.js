@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import DeleteButton from './DeleteButton'
+import CreateButton from './CreateButton'
 
 const query = gql`
   {
@@ -10,21 +12,20 @@ const query = gql`
     }
   }`
 
-// const createRoom = gql`
-//   mutation {
-//     createRoom(name:"hi"){
-//       name
-//     }
-//   }`
-
-// const deleteRoom = gql`
-// mutation {
-//   deleteRoom(id:"hi"){
-//     name
-//   }
-// }`
-
 export default class RoomMenu extends Component {
+  constructor (props) {
+    super(props)
+    this.update = this.update.bind(this)
+  }
+
+  update (cache, { data: { deleteRoom } }) {
+    const { rooms } = cache.readQuery({ query: query })
+    cache.writeQuery({
+      query: query,
+      data: { rooms: rooms.concat([deleteRoom]) }
+    })
+  }
+
   render () {
     return (
       <Query query={query}>
@@ -40,11 +41,12 @@ export default class RoomMenu extends Component {
             return (
               <div>
                 <div>{room.id}</div>
-                <button value={room.id} onClick={this.props.deleteRoom}>delete</button>
+                <DeleteButton id={room.id} update={this.update} />
                 <button value={room.sid} onClick={this.props.changeRoomID}>connect</button>
               </div>
             )
           })
+          rooms.push(<CreateButton changeRoom={this.props.changeRoomID} />)
           return rooms
         }}
       </Query>
