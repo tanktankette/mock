@@ -14,7 +14,14 @@ export default class RoomMenu extends Component {
     return (
       <Mutation
         mutation={deleteRoom}
-        update={this.props.update}
+        update={(cache, { data: { deleteRoom } }) => {
+          const { rooms } = cache.readQuery({ query: this.props.query })
+          // I think find would be faster than filter here but I'm not sure
+          cache.writeQuery({
+            query: this.props.query,
+            data: { rooms: rooms.filter(room => room.id !== this.props.id) }
+          })
+        }}
       >
         {(deleteRoom, { data }) => (
           <button

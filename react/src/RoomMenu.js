@@ -13,19 +13,6 @@ const query = gql`
   }`
 
 export default class RoomMenu extends Component {
-  constructor (props) {
-    super(props)
-    this.update = this.update.bind(this)
-  }
-
-  update (cache, { data: { deleteRoom } }) {
-    const { rooms } = cache.readQuery({ query: query })
-    cache.writeQuery({
-      query: query,
-      data: { rooms: rooms.concat([deleteRoom]) }
-    })
-  }
-
   render () {
     return (
       <Query query={query}>
@@ -37,11 +24,10 @@ export default class RoomMenu extends Component {
           }
 
           const rooms = data.rooms.map((room) => {
-            console.log(room.sid)
             return (
               <div>
                 <div>{room.id}</div>
-                <DeleteButton id={room.id} update={this.update} />
+                <DeleteButton id={room.id} query={query} />
                 <button value={room.sid} onClick={this.props.changeRoomID}>connect</button>
               </div>
             )
