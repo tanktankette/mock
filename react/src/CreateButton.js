@@ -19,11 +19,7 @@ export default class CreateButton extends Component {
         }}
       >
         {(CreateRoom, { data }) => (
-          <button
-            onClick={() => {
-              CreateRoom({ variables: { name: 'hi' } })
-            }}
-          >
+          <button onClick={() => { CreateRoom({ variables: { name: 'hi' } }) }} >
             Create
           </button>
         )}

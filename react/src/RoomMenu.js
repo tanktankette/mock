@@ -28,7 +28,7 @@ export default class RoomMenu extends Component {
               <div>
                 <div>{room.id}</div>
                 <DeleteButton id={room.id} query={query} />
-                <button value={room.sid} onClick={this.props.changeRoomID}>connect</button>
+                <button value={room.id} onClick={this.props.changeRoomID}>connect</button>
               </div>
             )
           })
