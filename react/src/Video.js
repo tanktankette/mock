@@ -1,6 +1,7 @@
+// import './secret.js'
 import React, { Component } from 'react'
 import styled from 'react-emotion'
-// const { connect, createLocalTracks } = require('twilio-video')
+const { connect, createLocalTracks } = require('twilio-video')
 
 const Container = styled('div')`
   background-image: url("/background.jpg");
@@ -9,6 +10,7 @@ const Container = styled('div')`
 `
 
 export default class Video extends Component {
+
   render () {
     return (
       <Container />

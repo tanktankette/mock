@@ -46,4 +46,10 @@ defmodule RoomsWeb.Resolvers.Calls do
         Rooms.Calls.delete_room(room)
     end
   end
+
+  def connect_to_room(_parent, args, _resolution) do
+    case Rooms.Calls.get_room(args[:id]) do
+      # Generate access token
+    end
+  end
 end

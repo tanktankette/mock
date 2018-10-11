@@ -37,6 +37,12 @@ defmodule RoomsWeb.Schema do
       arg :id, non_null(:id)
       resolve &Resolvers.Calls.delete_room/3
     end
+
+    @desc "Connect to Room"
+    field :connect_to_room, type: :string do
+      arg :id, non_null(:id)
+      resolve &Resolvers.Calls.connect_to_room/3
+    end
     
   end
 
