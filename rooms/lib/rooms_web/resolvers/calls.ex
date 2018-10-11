@@ -16,8 +16,8 @@ defmodule RoomsWeb.Resolvers.Calls do
   def create_room(_parent, args, _resolution) do
     #bearer authorization
     secret = Application.get_env(:rooms, :twilio_secret)
-    sid = Application.get_env(:rooms, :twilio_sid)
-    encoded = Base.encode64("#{sid}:#{secret}")
+    api = Application.get_env(:rooms, :twilio_api)
+    encoded = Base.encode64("#{api}:#{secret}")
     auth = "Basic #{encoded}"
     
     case HTTPoison.post "https://video.twilio.com/v1/Rooms", "", [{"Authorization", auth}] do
@@ -49,7 +49,41 @@ defmodule RoomsWeb.Resolvers.Calls do
 
   def connect_to_room(_parent, args, _resolution) do
     case Rooms.Calls.get_room(args[:id]) do
-      # Generate access token
+      nil ->
+        {:error, message: "Invalid id"}
+      room ->
+        import Joken
+        secret = Application.get_env(:rooms, :twilio_secret)
+        api = Application.get_env(:rooms, :twilio_api)
+        sid = Application.get_env(:rooms, :twilio_sid)
+        id = :crypto.strong_rand_bytes(10) |> Base.encode64 |> binary_part(0, 10)
+        jti = Enum.join([api, id], "-")
+        now = :os.system_time(:millisecond)
+        header = %{
+          typ: "JWT",
+          alg: "HS256",
+          cty: "twilio-fpa;v=1"        
+        }
+        
+        my_token = %{
+          jti: jti,
+          iss: api,
+          sub: sid,
+          nbf: now,
+          exp: now + (24*60*60*1000),
+          grants: %{
+            identity: "test@test.com",
+            video: %{
+              room: room.sid
+            }
+          }
+        }
+          |> token
+          |> with_header_args(header)
+          |> with_signer(hs256(secret))
+          |> sign
+          |> get_compact
+        {:ok, my_token}
     end
   end
 end
