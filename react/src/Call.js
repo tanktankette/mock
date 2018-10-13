@@ -8,13 +8,16 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const query = gql`
-  query Room($id: ID!){
-    room(id:$id){
-      name
-      sid
-      users {
+  query ConnectToRoom($id: ID!){
+    connectToRoom(id:$id){
+      room{
         name
+        sid
+        users {
+          name
+        }
       }
+      token
     }
   }`
 
@@ -40,7 +43,7 @@ export default class Call extends Component {
           console.log(data)
           return (
             <Container>
-              <Video sid={data.room.sid} />
+              <Video sid={data.connectToRoom.room.sid} token={data.connectToRoom.token} />
               <Controls changeRoomID={this.props.changeRoomID} />
               <Sidebar />
               <Callers />

@@ -15,7 +15,7 @@ export default class CreateButton extends Component {
       <Mutation
         mutation={createRoom}
         onCompleted={(data) => {
-          this.props.changeRoom({target: {value: data.createRoom.sid}})
+          this.props.changeRoom({target: {value: data.createRoom.id}})
         }}
       >
         {(CreateRoom, { data }) => (

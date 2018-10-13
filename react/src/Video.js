@@ -10,6 +10,17 @@ const Container = styled('div')`
 `
 
 export default class Video extends Component {
+  componentWillMount () {
+    connect(this.props.token, {
+      name: this.props.sid,
+      audio: true
+    }).then(room => {
+      console.log('connected')
+      room.on('participantConnected', participant => { console.log('Whoa! Someone joined!') })
+      console.log(room)
+      console.log(room.localParticipant.sid)
+    })
+  }
 
   render () {
     return (

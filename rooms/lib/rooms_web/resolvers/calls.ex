@@ -58,7 +58,8 @@ defmodule RoomsWeb.Resolvers.Calls do
         sid = Application.get_env(:rooms, :twilio_sid)
         id = :crypto.strong_rand_bytes(10) |> Base.encode64 |> binary_part(0, 10)
         jti = Enum.join([api, id], "-")
-        now = :os.system_time(:millisecond)
+        now = :os.system_time(:second)
+        IO.puts now
         header = %{
           typ: "JWT",
           alg: "HS256",
@@ -70,7 +71,7 @@ defmodule RoomsWeb.Resolvers.Calls do
           iss: api,
           sub: sid,
           nbf: now,
-          exp: now + (24*60*60*1000),
+          exp: now + (24*60*60),
           grants: %{
             identity: "test@test.com",
             video: %{
@@ -83,7 +84,7 @@ defmodule RoomsWeb.Resolvers.Calls do
           |> with_signer(hs256(secret))
           |> sign
           |> get_compact
-        {:ok, my_token}
+        {:ok, %{room: room, token: my_token}}
     end
   end
 end
