@@ -17,7 +17,7 @@ class App extends Component {
 
   render () {
     if (this.state.roomID) {
-      return <Call roomID={this.state.roomID} />
+      return <Call roomID={this.state.roomID} changeRoomID={this.changeRoomID} />
     } else {
       return <RoomMenu changeRoomID={this.changeRoomID} />
     }

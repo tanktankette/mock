@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 const createRoom = gql`
 mutation CreateRoom($name: String!){
   createRoom(name:$name){
-    sid
+    id
   }
 }`
 
@@ -15,15 +15,11 @@ export default class CreateButton extends Component {
       <Mutation
         mutation={createRoom}
         onCompleted={(data) => {
-          this.props.changeRoom({target: {value: data.createRoom.sid}})
+          this.props.changeRoom({target: {value: data.createRoom.id}})
         }}
       >
         {(CreateRoom, { data }) => (
-          <button
-            onClick={() => {
-              CreateRoom({ variables: { name: 'hi' } })
-            }}
-          >
+          <button onClick={() => { CreateRoom({ variables: { name: 'hi' } }) }} >
             Create
           </button>
         )}

@@ -7,7 +7,7 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/api'
+  uri: 'http://ec2-54-185-231-170.us-west-2.compute.amazonaws.com:4000/api'
 })
 
 ReactDOM.render(<ApolloProvider client={client}><App /></ApolloProvider>, document.getElementById('root'))

@@ -24,11 +24,7 @@ export default class RoomMenu extends Component {
         }}
       >
         {(deleteRoom, { data }) => (
-          <button
-            onClick={() => {
-              deleteRoom({ variables: { id: this.props.id } })
-            }}
-          >
+          <button onClick={() => { deleteRoom({ variables: { id: this.props.id } }) }}>
             Delete
           </button>
         )}

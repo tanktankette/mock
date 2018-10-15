@@ -33,7 +33,7 @@ export default class Controls extends Component {
         <img src='video.png' className={controlStyling} alt='' />
         <img src='signal.png' className={controlStyling} alt='' />
         <img src='settings.png' className={controlStyling} alt='' />
-        <img src='phone.png' className={controlStyling} alt='' />
+        <img src='phone.png' onClick={this.props.changeRoomID} className={controlStyling} alt='' />
       </Container>
     )
   }

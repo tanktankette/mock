@@ -16,8 +16,8 @@ defmodule RoomsWeb.Resolvers.Calls do
   def create_room(_parent, args, _resolution) do
     #bearer authorization
     secret = Application.get_env(:rooms, :twilio_secret)
-    sid = Application.get_env(:rooms, :twilio_sid)
-    encoded = Base.encode64("#{sid}:#{secret}")
+    api = Application.get_env(:rooms, :twilio_api)
+    encoded = Base.encode64("#{api}:#{secret}")
     auth = "Basic #{encoded}"
     
     case HTTPoison.post "https://video.twilio.com/v1/Rooms", "", [{"Authorization", auth}] do
@@ -44,6 +44,46 @@ defmodule RoomsWeb.Resolvers.Calls do
         {:error, message: "Invalid id"}
       room ->
         Rooms.Calls.delete_room(room)
+    end
+  end
+
+  def connect_to_room(_parent, args, _resolution) do
+    case Rooms.Calls.get_room(args[:id]) do
+      nil ->
+        {:error, message: "Invalid id"}
+      room ->
+        import Joken
+        secret = Application.get_env(:rooms, :twilio_secret)
+        api = Application.get_env(:rooms, :twilio_api)
+        sid = Application.get_env(:rooms, :twilio_sid)
+        now = :os.system_time(:second)
+        jti = Enum.join([api, now], "-")
+        IO.puts now
+        header = %{
+          typ: "JWT",
+          alg: "HS256",
+          cty: "twilio-fpa;v=1"        
+        }
+        
+        my_token = %{
+          jti: jti,
+          iss: api,
+          sub: sid,
+          nbf: now,
+          exp: now + (24*60*60),
+          grants: %{
+            identity: now, #ideally the name of the user, but we arent there yet
+            video: %{
+              room: room.sid
+            }
+          }
+        }
+          |> token
+          |> with_header_args(header)
+          |> with_signer(hs256(secret))
+          |> sign
+          |> get_compact
+        {:ok, %{room: room, token: my_token}}
     end
   end
 end

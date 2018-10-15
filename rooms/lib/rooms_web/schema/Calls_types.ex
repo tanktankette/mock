@@ -15,4 +15,9 @@ defmodule RoomsWeb.Schema.CallsTypes do
     field :cid, :string
     field :room, :room, resolve: assoc(:room)
   end
+
+  object :connection do
+    field :room, :room
+    field :token, :string
+  end
 end
