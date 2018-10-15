@@ -1,11 +1,10 @@
 // import './secret.js'
 import React, { Component } from 'react'
 import styled from 'react-emotion'
-const { connect, createLocalTracks } = require('twilio-video')
+import Participant from './Participant'
+const { connect } = require('twilio-video')
 
 const Container = styled('div')`
-  background-image: url("/background.jpg");
-  background-size: cover;
   grid-area: 1 / 1 / 3 / 3;
 `
 
@@ -13,88 +12,61 @@ export default class Video extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      room: null
+      room: null,
+      participants: [],
+      localVideo: true,
+      localAudio: true,
+      disconnected: false
     }
-    this.attachParticipantTracks = this.attachParticipantTracks.bind(this)
-    this.detachParticipantTracks = this.detachParticipantTracks.bind(this)
     this.roomJoined = this.roomJoined.bind(this)
-  }
-
-  attachTracks (tracks, container) {
-    tracks.forEach((track) => {
-      container.appendChild(track.attach())
-    })
-  }
-
-  attachParticipantTracks (participant, container) {
-    var tracks = Array.from(participant.tracks.values())
-    this.attachTracks(tracks, container)
-  }
-
-  detachTracks (tracks) {
-    tracks.forEach((track) => {
-      track.detach().forEach((detachedElement) => {
-        detachedElement.remove()
-      })
-    })
-  }
-
-  detachParticipantTracks (participant) {
-    var tracks = Array.from(participant.tracks.values())
-    this.detachTracks(tracks)
   }
 
   roomJoined (room) {
     console.log('connected')
-    this.setState({room: room})
-
-    room.participants.forEach(participant => {
-      console.log("Already in Room: '" + participant.identity + "'")
-      let remoteTracksContainer = document.getElementById('remoteTracksContainer')
-      this.attachParticipantTracks(participant, remoteTracksContainer)
+    this.setState({
+      room: room,
+      participants: room.participants
     })
 
     room.on('participantConnected', participant => {
+      let newParticpants = this.state.participants
+      newParticpants.set(participant.sid, participant)
+      this.setState({participants: newParticpants})
       console.log("Joining: '" + participant.identity + "'")
     })
 
-    room.on('trackAdded', (track, participant) => {
-      console.log(participant.identity + ' added track: ' + track.kind)
-      let remoteTracksContainer = document.getElementById('remoteTracksContainer')
-      this.attachTracks([track], remoteTracksContainer)
-    })
-
-    room.on('trackRemoved', (track, participant) => {
-      console.log(participant.identity + ' removed track: ' + track.kind)
-      this.detachTracks([track])
-    })
-
     room.on('participantDisconnected', participant => {
+      let newParticpants = this.state.participants
+      newParticpants.delete(participant.sid)
+      this.setState({participants: newParticpants})
       console.log("Participant '" + participant.identity + "' left the room")
-      this.detachParticipantTracks(participant)
     })
 
     room.on('disconnected', (room, error) => {
       console.log(error)
-      room.participants.forEach(this.detachParticipantTracks)
     })
   }
 
   componentDidMount () {
     connect(this.props.token, {
       name: this.props.sid,
+      video: this.state.localVideo,
+      audio: this.state.localAudio
     })
       .then(this.roomJoined)
   }
 
   componentWillUnmount () {
-    this.state.room.disconnect()
+    if (this.state.room) this.state.room.disconnect()
   }
 
   render () {
+    const participants = this.state.participants.map(participant => {
+      return <Participant participant={participant} key={participant.identity} />
+    })
     return (
       <Container>
-        <div id='remoteTracksContainer' />
+        {participants}
       </Container>
     )
   }

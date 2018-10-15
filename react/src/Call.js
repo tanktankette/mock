@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar'
 import Controls from './Controls'
-import Callers from './Callers'
 import Video from './Video'
 import styled from 'react-emotion'
 import { Query } from 'react-apollo'
@@ -45,7 +44,6 @@ export default class Call extends Component {
               <Video sid={data.connectToRoom.room.sid} token={data.connectToRoom.token} />
               <Controls changeRoomID={this.props.changeRoomID} />
               <Sidebar />
-              <Callers />
             </Container>
           )
         }}
