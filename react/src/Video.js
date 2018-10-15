@@ -45,6 +45,7 @@ export default class Video extends Component {
   }
 
   roomJoined (room) {
+    console.log('connected')
     this.setState({room: room})
 
     room.participants.forEach(participant => {
@@ -80,7 +81,9 @@ export default class Video extends Component {
   }
 
   componentDidMount () {
-    connect(this.props.token, {name: this.props.sid})
+    connect(this.props.token, {
+      name: this.props.sid,
+    })
       .then(this.roomJoined)
   }
 

@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 const createRoom = gql`
 mutation CreateRoom($name: String!){
   createRoom(name:$name){
-    sid
+    id
   }
 }`
 

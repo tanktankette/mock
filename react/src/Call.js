@@ -40,7 +40,6 @@ export default class Call extends Component {
             console.log(error)
             return <p>Error :(</p>
           }
-          console.log(data)
           return (
             <Container>
               <Video sid={data.connectToRoom.room.sid} token={data.connectToRoom.token} />
