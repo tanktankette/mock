@@ -17,6 +17,7 @@ export default class Video extends Component {
     }).then(room => {
       console.log('connected')
       room.on('participantConnected', participant => { console.log('Whoa! Someone joined!') })
+      room.on('disconnected', (room, error) => { console.log(error) })
       console.log(room)
       console.log(room.localParticipant.sid)
     })

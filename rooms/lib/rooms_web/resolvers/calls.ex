@@ -56,9 +56,8 @@ defmodule RoomsWeb.Resolvers.Calls do
         secret = Application.get_env(:rooms, :twilio_secret)
         api = Application.get_env(:rooms, :twilio_api)
         sid = Application.get_env(:rooms, :twilio_sid)
-        id = :crypto.strong_rand_bytes(10) |> Base.encode64 |> binary_part(0, 10)
-        jti = Enum.join([api, id], "-")
         now = :os.system_time(:second)
+        jti = Enum.join([api, now], "-")
         IO.puts now
         header = %{
           typ: "JWT",
@@ -73,7 +72,7 @@ defmodule RoomsWeb.Resolvers.Calls do
           nbf: now,
           exp: now + (24*60*60),
           grants: %{
-            identity: "test@test.com",
+            identity: now, #ideally the name of the user, but we arent there yet
             video: %{
               room: room.sid
             }
