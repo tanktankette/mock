@@ -22,12 +22,6 @@ defmodule RoomsWeb.Schema do
       resolve &Resolvers.Calls.get_room_by/3
     end
 
-    @desc "Connect to Room"
-    field :connect_to_room, type: :connection do
-      arg :id, non_null(:id)
-      resolve &Resolvers.Calls.connect_to_room/3
-    end
-
   end
 
   mutation do
@@ -42,6 +36,13 @@ defmodule RoomsWeb.Schema do
     field :delete_room, type: :room do
       arg :id, non_null(:id)
       resolve &Resolvers.Calls.delete_room/3
+    end
+
+    @desc "Connect to Room"
+    field :connect_to_room, type: :connection do
+      arg :id, non_null(:id)
+      arg :name, non_null(:string)
+      resolve &Resolvers.Calls.connect_to_room/3
     end
     
   end

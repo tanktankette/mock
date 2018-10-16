@@ -6,20 +6,21 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      roomID: null
+      room: null
     }
-    this.changeRoomID = this.changeRoomID.bind(this)
+    this.changeRoom = this.changeRoom.bind(this)
   }
 
-  changeRoomID (e) {
-    this.setState({roomID: e.target.value})
+  changeRoom (room) {
+    if (room) this.setState({room: room.room, token: room.token})
+    else this.setState({room: null, token: null})
   }
 
   render () {
-    if (this.state.roomID) {
-      return <Call roomID={this.state.roomID} changeRoomID={this.changeRoomID} />
+    if (this.state.room) {
+      return <Call room={this.state.room} token={this.state.token} changeRoom={this.changeRoom} />
     } else {
-      return <RoomMenu changeRoomID={this.changeRoomID} />
+      return <RoomMenu changeRoom={this.changeRoom} />
     }
   }
 }

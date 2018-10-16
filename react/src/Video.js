@@ -13,7 +13,7 @@ export default class Video extends Component {
     super(props)
     this.state = {
       room: null,
-      participants: [],
+      participants: null,
       localVideo: true,
       localAudio: true,
       disconnected: false
@@ -61,9 +61,12 @@ export default class Video extends Component {
   }
 
   render () {
-    const participants = this.state.participants.map(participant => {
-      return <Participant participant={participant} key={participant.identity} />
-    })
+    let participants = null
+    if (this.state.participants) {
+      participants = Array.from(this.state.participants.values()).map(participant => {
+        return <Participant participant={participant} key={participant.identity} />
+      })
+    }
     return (
       <Container>
         {participants}

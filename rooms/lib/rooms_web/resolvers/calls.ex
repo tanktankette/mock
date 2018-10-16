@@ -72,7 +72,7 @@ defmodule RoomsWeb.Resolvers.Calls do
           nbf: now,
           exp: now + (24*60*60),
           grants: %{
-            identity: now, #ideally the name of the user, but we arent there yet
+            identity: args[:name],
             video: %{
               room: room.sid
             }
