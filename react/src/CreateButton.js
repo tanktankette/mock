@@ -16,12 +16,9 @@ export default class CreateButton extends Component {
         mutation={createRoom}
         update={(cache, { data: { createRoom } }) => {
           const { rooms } = cache.readQuery({ query: this.props.query })
-          rooms.push(createRoom)
-          console.log('pushing new room to query cache')
-          console.log(createRoom)
           cache.writeQuery({
             query: this.props.query,
-            data: { rooms: rooms }
+            data: { rooms: rooms.concat([createRoom]) }
           })
         }}
       >
