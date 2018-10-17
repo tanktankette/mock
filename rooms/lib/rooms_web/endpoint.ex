@@ -35,7 +35,7 @@ defmodule RoomsWeb.Endpoint do
     key: "_rooms_key",
     signing_salt: "cSb5WhN+"
 
-  plug CORSPlug, origin: ["ec2-54-185-231-170.us-west-2.compute.amazonaws.com:3000"]
+  plug CORSPlug, origin: ["http://ec2-54-185-231-170.us-west-2.compute.amazonaws.com:3000"]
 
   plug RoomsWeb.Router
 
