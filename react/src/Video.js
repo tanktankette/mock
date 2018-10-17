@@ -2,10 +2,13 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
 import Participant from './Participant'
+import Callers from './Callers'
 const { connect } = require('twilio-video')
 
 const Container = styled('div')`
-  grid-area: 1 / 1 / 3 / 3;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 `
 
 export default class Video extends Component {
@@ -61,15 +64,19 @@ export default class Video extends Component {
   }
 
   render () {
-    let participants = null
+    let participants
+    let primary
     if (this.state.participants) {
       participants = Array.from(this.state.participants.values()).map(participant => {
         return <Participant participant={participant} key={participant.identity} />
       })
+      primary = participants.shift()
+      console.log(primary)
     }
     return (
       <Container>
-        {participants}
+        {primary}
+        <Callers participants={participants} />
       </Container>
     )
   }

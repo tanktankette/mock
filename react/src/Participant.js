@@ -1,29 +1,26 @@
 import React, { Component } from 'react'
-// import styled from 'react-emotion'
-// import { css } from 'emotion'
+import styled from 'react-emotion'
+import { css } from 'emotion'
 
-// const Container = styled('div')`
-//   grid-area: 2 / 2 / 3 / 3;
-//   display: flex;
-//   flex-direction: row;
-//   justify-self: end;
-//   align-self: end;
-//   justify-content: flex-end;
-//   margin: 20px;
-// `
+const Container = styled('div')`
+  position: absolute;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+`
 
-// const callerStyling = css`
-//   width: 64px;
-//   padding: 10px;
-//   &:hover {
-//     background-color: grey;
-//   };
-// `
+// The video for some reason create 4 pixels of blank space beneath it when I set it's height to 100%
+const videoStyling = css`
+  height: 100%;
+  margin-bottom: -5px;
+`
 
 export default class Participant extends Component {
   attachTracks (tracks, container) {
     tracks.forEach((track) => {
-      container.appendChild(track.attach())
+      let element = track.attach()
+      element.classList.add(videoStyling)
+      container.appendChild(element)
     })
   }
 
@@ -42,7 +39,7 @@ export default class Participant extends Component {
 
   render () {
     return (
-      <div id='container' />
+      <Container id='container' />
     )
   }
 }
