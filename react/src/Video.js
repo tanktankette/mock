@@ -57,6 +57,7 @@ export default class Video extends Component {
       audio: this.state.localAudio
     })
       .then(this.roomJoined)
+      .catch(console.log)
   }
 
   componentWillUnmount () {

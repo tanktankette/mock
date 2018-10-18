@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Sidebar from './Sidebar'
 import Controls from './Controls'
 import Video from './Video'
-import styled from 'react-emotion'
 
 export default class Call extends Component {
   render () {

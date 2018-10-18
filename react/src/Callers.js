@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
-import { css } from 'emotion'
+// import { css } from 'emotion'
 
 const Container = styled('div')`
   position: absolute;
-  bottom: 100px;
+  bottom: 20px;
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -12,21 +12,19 @@ const Container = styled('div')`
   align-self: end;
   justify-content: flex-end;
   margin: 20px;
+  height: 100px;
 `
 
-const callerStyling = css`
-  width: 64px;
-  padding: 10px;
-  &:hover {
-    background-color: grey;
-  };
-`
+// const callerStyling = css`
+//   width: 64px;
+//   padding: 10px;
+//   &:hover {
+//     background-color: grey;
+//   };
+// `
 
 export default class Callers extends Component {
   render () {
-    if (this.props.participants) {
-      this.props.participants.forEach(console.log)
-    }
     return (
       <Container>
         {this.props.participants}
