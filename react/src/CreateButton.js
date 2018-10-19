@@ -14,8 +14,12 @@ export default class CreateButton extends Component {
     return (
       <Mutation
         mutation={createRoom}
-        onCompleted={(data) => {
-          this.props.changeRoom({target: {value: data.createRoom.id}})
+        update={(cache, { data: { createRoom } }) => {
+          const { rooms } = cache.readQuery({ query: this.props.query })
+          cache.writeQuery({
+            query: this.props.query,
+            data: { rooms: rooms.concat([createRoom]) }
+          })
         }}
       >
         {(CreateRoom, { data }) => (
