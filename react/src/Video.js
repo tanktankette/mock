@@ -68,8 +68,8 @@ export default class Video extends Component {
     let participants
     let primary
     if (this.state.participants) {
-      participants = Array.from(this.state.participants.values()).map(participant => {
-        return <Participant participant={participant} key={participant.identity} />
+      participants = Array.from(this.state.participants.values()).map((participant, i) => {
+        return <Participant primary={i === 0} participant={participant} key={participant.identity} />
       })
       primary = participants.shift()
       console.log(primary)

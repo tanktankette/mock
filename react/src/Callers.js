@@ -5,13 +5,10 @@ import styled from 'react-emotion'
 const Container = styled('div')`
   position: absolute;
   bottom: 20px;
-  width: 100vw;
+  width: 95vw;
   display: flex;
   flex-direction: row;
-  justify-self: end;
-  align-self: end;
   justify-content: flex-end;
-  margin: 20px;
   height: 100px;
 `
 

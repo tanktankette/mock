@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-import styled from 'react-emotion'
 import { css } from 'emotion'
 
-const Container = styled('div')`
+const primaryStyling = css`
+  height: 100%;
   position: absolute;
   margin-left: 50%;
   transform: translateX(-50%);
+`
+
+const secondaryStyling = css`
   height: 100%;
+  margin-left: 10px;
 `
 
 // The video for some reason create 4 pixels of blank space beneath it when I set it's height to 100%
@@ -39,7 +43,10 @@ export default class Participant extends Component {
 
   render () {
     return (
-      <Container id={'container' + this.props.participant.sid} />
+      <div
+        className={this.props.primary ? primaryStyling : secondaryStyling}
+        id={'container' + this.props.participant.sid}
+      />
     )
   }
 }
