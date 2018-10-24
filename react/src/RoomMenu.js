@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import DeleteButton from './DeleteButton'
 import CreateButton from './CreateButton'
-import ConnectButton from './ConnectButton'
+import RoomIcon from './RoomIcon'
 
 const query = gql`
   {
     rooms {
       id
+      name
+      sid
     }
   }`
 
@@ -37,11 +38,13 @@ export default class RoomMenu extends Component {
 
           const rooms = data.rooms.map((room) => {
             return (
-              <div key={room.id}>
-                <div>{room.id}</div>
-                <DeleteButton id={room.id} query={query} />
-                <ConnectButton id={room.id} name={this.state.name} changeRoom={this.props.changeRoom} />
-              </div>
+              <RoomIcon
+                key={room.id}
+                name={this.state.name}
+                changeRoom={this.props.changeRoom}
+                room={room}
+                query={query}
+              />
             )
           })
           return (
