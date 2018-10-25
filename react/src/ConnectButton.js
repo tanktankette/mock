@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { css } from 'emotion'
+
+const style = css`
+  position: relative;
+  top: 59px;
+  left: 60px;
+`
 
 const connectToRoom = gql`
 mutation ConnectToRoom($id:ID!, $name: String!){
@@ -23,7 +30,7 @@ export default class ConnectButton extends Component {
         }}
       >
         {(ConnectToRoom, { data }) => (
-          <button disabled={!this.props.name} onClick={() => ConnectToRoom({ variables: {
+          <button className={style} disabled={!this.props.name} onClick={() => ConnectToRoom({ variables: {
             name: this.props.name,
             id: this.props.id
           } })}>

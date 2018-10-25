@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { css } from 'emotion'
+
+const style = css`
+  position: relative;
+  top: 59px;
+  left: 60px;
+`
 
 const deleteRoom = gql`
 mutation DeleteRoom($id: ID!){
@@ -24,7 +31,7 @@ export default class RoomMenu extends Component {
         }}
       >
         {(deleteRoom, { data }) => (
-          <button onClick={() => { deleteRoom({ variables: { id: this.props.id } }) }}>
+          <button className={style} onClick={() => { deleteRoom({ variables: { id: this.props.id } }) }}>
             Delete
           </button>
         )}

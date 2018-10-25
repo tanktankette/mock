@@ -2,36 +2,54 @@ import React, { Component } from 'react'
 import ConnectButton from './ConnectButton'
 import DeleteButton from './DeleteButton'
 import styled from 'react-emotion'
+import { css } from 'emotion'
+
+const style = css`
+  position: relative;
+  top: 111px;
+  left: 7px;
+`
 
 let jdenticon = require('jdenticon')
 
-const fade = styled('div')`
+const Fade = styled('div')`
   border-radius: 10px;
   content:"";
   position:absolute;
-  width:100%;
-  height:100%;
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(30,30,30,1));
+  width:150px;
+  height:150px;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(255,255,255,1));
+`
+
+const Container = styled('div')`
+  border-radius: 10px;
+  height: 150px;
+  width: 150px;
+`
+
+const SvgContainer = styled('div')`
+  position: absolute;
+  border-radius: 10px;
+  height: 150px;
+  width: 150px;
 `
 
 export default class RoomIcon extends Component {
-  render () {
-    let png = jdenticon.toPng(this.props.room.sid, 150)
+  componentDidMount () {
+    let svg = jdenticon.toSvg(this.props.room.sid, 150)
+    let div = document.getElementById('icon' + this.props.room.sid)
+    div.innerHTML = svg
+  }
 
-    const Container = styled('div')`
-      position: absolute;
-      background-image: {png};
-      background-size: contain;
-      border-radius: 10px;
-      height: 150px;
-      width: 150px;
-    `
-    let title = this.props.room.id + ' - ' + this.props.rooms.name
+  render () {
+    let title = this.props.room.id + ' - ' + this.props.room.name
     return (
       <Container>
-        <div>{title}</div>
+        <SvgContainer id={'icon' + this.props.room.sid} />
+        <Fade />
+        <div className={style}>{title}</div>
         <DeleteButton id={this.props.room.id} query={this.props.query} />
-        <ConnectButton id={this.props.room.id} name={this.state.name} changeRoom={this.props.changeRoom} />
+        <ConnectButton id={this.props.room.id} name={this.props.name} changeRoom={this.props.changeRoom} />
       </Container>
     )
   }

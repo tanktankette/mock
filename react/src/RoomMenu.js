@@ -3,6 +3,11 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import CreateButton from './CreateButton'
 import RoomIcon from './RoomIcon'
+import styled from 'react-emotion'
+
+const Container = styled('div')`
+  display: flex;
+`
 
 const query = gql`
   {
@@ -35,7 +40,7 @@ export default class RoomMenu extends Component {
             console.log(error)
             return <p>Error :(</p>
           }
-
+          console.log(data)
           const rooms = data.rooms.map((room) => {
             return (
               <RoomIcon
@@ -52,7 +57,9 @@ export default class RoomMenu extends Component {
               <CreateButton changeRoom={this.props.changeRoom} query={query} />
               <br /><br />
               <input type='text' placeholder='name' value={this.state.name} onChange={this.changeName} />
-              {rooms}
+              <Container>
+                {rooms}
+              </Container>
             </div>
           )
         }}

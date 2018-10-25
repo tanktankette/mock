@@ -6,6 +6,8 @@ const createRoom = gql`
 mutation CreateRoom($name: String!){
   createRoom(name:$name){
     id
+    sid
+    name
   }
 }`
 
