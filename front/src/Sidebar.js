@@ -1,3 +1,9 @@
+/*
+  Sidebar:
+    This component exists to mimic the sidebar that Google Hangouts has.
+    Currently no functionality except in that it will hide itself if the mouse isn't on the left
+    side of the screen.
+*/
 import React, { Component } from 'react'
 import styled from 'react-emotion'
 import { css } from 'emotion'
