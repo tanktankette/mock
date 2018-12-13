@@ -1,3 +1,10 @@
+/*
+  CreateButton:
+    A button that creates a new room. Room name is currently hardcoded to 'hi'
+    Props:
+      query (required):
+        Takes in the Rooms query from RoomMenu so that it can be updated when the mutation finishes
+*/
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'

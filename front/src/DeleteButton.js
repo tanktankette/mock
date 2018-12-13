@@ -1,3 +1,12 @@
+/*
+  DeleteButton:
+    This component is used in RoomIcon so that the user can delete a room.
+    Props:
+      id (required):
+        The id number of the room to be closed
+      query (required):
+        The Rooms query from RoomMenu so that the DeleteRoom mutation can update the query
+*/
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'

@@ -1,3 +1,12 @@
+/*
+  Controls:
+    This component hold various buttons for controlling the call. Only the hangup button has
+    functionalty at the moment.
+    Props:
+      disconnectFromRoom (required):
+        A required function that is passed to the hangup button so that the user can
+        disconnect from a room
+*/
 import React, { Component } from 'react'
 import styled from 'react-emotion'
 import { css } from 'emotion'

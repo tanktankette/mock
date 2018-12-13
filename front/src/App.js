@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import Call from './Call'
 import RoomMenu from './RoomMenu'
+import Sidebar from './Sidebar'
+import Controls from './Controls'
+import Video from './Video'
 
 class App extends Component {
   constructor (props) {
@@ -17,8 +19,16 @@ class App extends Component {
   }
 
   render () {
+    // If state.room exists, then mount the Video, Controls, and Sidebar components and connect
+    // Otherwise, show the RoomMenu component so that the user can select a room to connect to
     if (this.state.room) {
-      return <Call room={this.state.room} token={this.state.token} changeRoom={this.changeRoom} />
+      return (
+        <div>
+          <Video sid={this.state.room.sid} token={this.state.token} />
+          <Controls changeRoom={this.changeRoom} />
+          <Sidebar />
+        </div>
+      )
     } else {
       return <RoomMenu changeRoom={this.changeRoom} />
     }

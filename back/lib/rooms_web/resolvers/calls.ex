@@ -14,7 +14,7 @@ defmodule RoomsWeb.Resolvers.Calls do
   end
 
   def create_room(_parent, args, _resolution) do
-    #bearer authorization
+    #Set up Twilio authorization
     secret = Application.get_env(:rooms, :twilio_secret)
     api = Application.get_env(:rooms, :twilio_api)
     encoded = Base.encode64("#{api}:#{secret}")

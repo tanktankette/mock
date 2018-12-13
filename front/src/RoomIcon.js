@@ -1,3 +1,9 @@
+/*
+  RoomIcon:
+    This component is used in RoomMenu to represent the different room available to connect to.
+    It currently generates a identicon with the rooms sid to help differentiate the rooms.
+    Eventually the icons would be set by whomever create the room.
+*/
 import React, { Component } from 'react'
 import ConnectButton from './ConnectButton'
 import DeleteButton from './DeleteButton'

@@ -1,3 +1,10 @@
+/*
+  RoomMenu:
+    This component fetches and presents the user with a list of rooms to connect to. Eventually this
+    component will use a GraphQL subscription instead of just a query so that it can keep up to date
+    on room deletions. As is, it only fetches the data once and doesn't know if a room has been
+    closed or added by another user.
+*/
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
